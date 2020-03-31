@@ -19,11 +19,11 @@ RUN adduser github -D -h /home/github
 RUN addgroup github adm
 RUN echo "%sudo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+USER github
 WORKDIR /home/github
 
 RUN curl -Ls https://github.com/actions/runner/releases/download/v${GITHUB_RUNNER_VERSION}/actions-runner-linux-x64-${GITHUB_RUNNER_VERSION}.tar.gz | tar xz 
-USER github
 COPY --chown=github:github entrypoint.sh ./entrypoint.sh
 RUN  chmod u+x ./entrypoint.sh
-
+RUN ls /home/github
 ENTRYPOINT ["/home/github/entrypoint.sh"]
