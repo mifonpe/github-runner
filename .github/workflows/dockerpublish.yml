@@ -7,12 +7,18 @@ on:
       - master
     tags:
       - v*
+    paths:
+      - 'Dockerfile'
+      - 'entrypoint.sh'
           
   pull_request:
     
     branches:
       - master
       - develop
+    paths:
+      - 'Dockerfile'
+      - 'entrypoint.sh'
 env:
   IMAGE_NAME: github-runner
 
