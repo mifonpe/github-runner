@@ -13,8 +13,7 @@ USER root
 
 RUN apk update && apk add --no-cache curl sudo git jq openssh libunwind \
     nghttp2-libs libidn krb5-libs libuuid lttng-ust zlib \
-    libstdc++ libintl \
-    icu 
+    libstdc++ libintl icu 
 RUN mkdir /home/github 
 RUN adduser github -D -h /home/github  
 RUN addgroup github adm
