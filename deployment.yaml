@@ -14,18 +14,24 @@ spec:
       labels:
         app: github-runner
     spec:
+      imagePullSecrets:
+      - name: regcred
       containers:
       - name: github-runner
         image: docker.pkg.github.com/mifonpe/github-runner/github-runner:latest
-        imagePullSecrets:
-          - name: myregistrykey
         env:
         - name: GITHUB_OWNER
           value: mifonpe
         - name: GITHUB_REPOSITORY
-          value: gihub-runner
+          value: alteos-microservice
         - name: GITHUB_PAT 
           valueFrom:
             secretKeyRef:
               name: github-runner-token
               key: token
+        volumeMounts: 
+        - mountPath: /home/github/_work
+          name: workspace
+      volumes:
+      - name: workspace
+        emptyDir: {}
