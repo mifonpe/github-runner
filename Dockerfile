@@ -22,7 +22,7 @@ RUN apt-get update \
     && usermod -aG sudo github \
     && echo "%sudo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN wget -q ${HELM_URL}/${HELM_TAR} && tar xzfv ${HELM_TAR} mv linux-amd64/helm /usr/local/bin/helm
+RUN wget -q ${HELM_URL}/${HELM_TAR} && tar xzfv ${HELM_TAR} && mv linux-amd64/helm /usr/local/bin/helm
 
 USER github
 WORKDIR /home/github
