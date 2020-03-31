@@ -27,7 +27,6 @@ env:
 jobs:
 # test: maybe in the future
   push:
-    needs: build
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
