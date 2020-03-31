@@ -17,6 +17,8 @@ spec:
       containers:
       - name: github-runner
         image: docker.pkg.github.com/mifonpe/github-runner/github-runner:latest
+        imagePullSecrets:
+          - name: myregistrykey
         env:
         - name: GITHUB_OWNER
           value: mifonpe
