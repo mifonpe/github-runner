@@ -1,4 +1,5 @@
 #!/bin/sh
+set +x
 registration_url="https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPOSITORY}/actions/runners/registration-token"
 echo "Requesting registration URL at '${registration_url}'"
 
@@ -21,3 +22,4 @@ trap 'remove; exit 130' INT
 trap 'remove; exit 143' TERM
 
 ./run.sh "$*" &
+wait $!

@@ -1,7 +1,8 @@
 FROM debian:buster-slim
-
 ARG GITHUB_RUNNER_VERSION="2.165.2"
 
+ENV HELM_URL "https://get.helm.sh"
+ENV HELM_TAR "helm-v3.1.2-linux-amd64.tar.gz"
 ENV RUNNER_NAME "runner"
 ENV GITHUB_PAT ""
 ENV GITHUB_OWNER ""
@@ -14,11 +15,14 @@ RUN apt-get update \
         sudo \
         git \
         jq \
+        wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -m github \
     && usermod -aG sudo github \
     && echo "%sudo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+RUN wget -q ${HELM_URL}/${HELM_TAR} && tar xzfv ${HELM_TAR} && mv linux-amd64/helm /usr/local/bin/helm
 
 USER github
 WORKDIR /home/github
